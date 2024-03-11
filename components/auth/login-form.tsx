@@ -9,6 +9,7 @@ import { FormError } from "../form-error";
 import { Button } from "../ui/button";
 import { Input } from "../ui/input";
 import { Label } from "@radix-ui/react-label";
+import useSessionData from "@/hooks/useSessionData";
 
 export default function LoginForm() {
   const [email, setEmail] = useState("");
@@ -16,8 +17,14 @@ export default function LoginForm() {
   const [error, setError] = useState("");
   const [isPending, startTransition] = useTransition();
 
+  const { session } = useSessionData();
+
   const router = useRouter();
 
+  if (session) {
+    router.replace(`/${session?.user?.role}`); // Or any other appropriate redirect
+    return null; // Prevent the form from being rendered
+  }
   const handleSubmit = async (e: { preventDefault: () => void }) => {
     e.preventDefault();
 
