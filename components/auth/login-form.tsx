@@ -22,8 +22,8 @@ export default function LoginForm() {
   const router = useRouter();
 
   if (session) {
-    router.replace(`/${session?.user?.role}`); // Or any other appropriate redirect
-    return null; // Prevent the form from being rendered
+    router.replace(`/${(session.user as { role: string }).role}`);
+    return null;
   }
   const handleSubmit = async (e: { preventDefault: () => void }) => {
     e.preventDefault();
