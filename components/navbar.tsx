@@ -1,3 +1,4 @@
+/* eslint-disable react/no-unescaped-entities */
 "use client";
 
 import { FcMenu } from "react-icons/fc";
@@ -14,11 +15,8 @@ import {
 
 import { Button } from "./ui/button";
 import { signOut } from "next-auth/react";
-import { LandlordSideLists } from "@/constants/LandlordSidebar";
-import { PersonIcon } from "@radix-ui/react-icons";
 
-const Navbar = () => {
-  const handleClose = () => {};
+const Navbar = ({ children }: { children: React.ReactNode }) => {
   return (
     <nav className="fixed top-4 w-full flexCenter z-50 rounded-lg">
       <div className="w-[90vw] flexBetween flex-row px-5 sm:px-10 mx-auto py-3 bg-primary rounded-lg xl:py-5">
@@ -38,19 +36,7 @@ const Navbar = () => {
                 Make changes to your profile here. Click save when you're done.
               </SheetDescription>
             </SheetHeader>
-            <div className="grid gap-4 py-4">
-              {LandlordSideLists.map((list, index) => (
-                <div
-                  key={index}
-                  className="hover:bg-primary hover:text-white px-4 py-2 rounded-md cursor-pointer transition-all duration-300 ease-in-out text-sm font-medium text-gray-800"
-                >
-                  <div className="flex items-center gap-3">
-                    <list.icon />
-                    {list.name}
-                  </div>
-                </div>
-              ))}
-            </div>
+            <div className="grid gap-4 py-4">{children}</div>
             <SheetFooter>
               <div>
                 <Button
