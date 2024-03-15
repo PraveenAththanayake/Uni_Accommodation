@@ -14,3 +14,12 @@ export const RegisterSchema = z.object({
     required_error: "You need to select a notification type.",
   }),
 });
+
+export const LocationSchema = z.object({
+  name: z.string().min(1, { message: "Accommodation Name is required" }),
+  location: z.string().min(1, { message: "Location is required" }),
+  price: z.string().min(1, { message: "Monthly Price is required" }),
+  description: z.string().min(1, { message: "Description is required" }),
+  latitude: z.number(),
+  longitude: z.number(),
+});
