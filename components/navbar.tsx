@@ -11,6 +11,7 @@ import {
   SheetHeader,
   SheetTitle,
   SheetTrigger,
+  SheetClose,
 } from "@/components/ui/sheet";
 
 import { Button } from "./ui/button";
@@ -36,7 +37,9 @@ const Navbar = ({ children }: { children: React.ReactNode }) => {
                 Make changes to your profile here. Click save when you're done.
               </SheetDescription>
             </SheetHeader>
-            <div className="grid gap-4 py-4">{children}</div>
+            <SheetClose asChild>
+              <div className="grid gap-4 py-4">{children}</div>
+            </SheetClose>
             <SheetFooter>
               <div>
                 <Button
