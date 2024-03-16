@@ -7,6 +7,7 @@ import { LandlordSideLists } from "@/constants/LandlordSidebar";
 import { useState } from "react";
 import YourPlaces from "@/components/bottom_card/your-places";
 import Requests from "@/components/bottom_card/request";
+import Profile from "@/components/bottom_card/profile";
 
 export default function UserInfo() {
   const [selectedTab, setSelectedTab] = useState<number | null>(0);
@@ -43,7 +44,7 @@ export default function UserInfo() {
             {selectedTab === 2 ? <YourPlaces /> : null}
             {selectedTab === 3 ? <Requests /> : null}
             {selectedTab === 4 ? <YourPlaces /> : null}
-            {selectedTab === 5 ? <YourPlaces /> : null}
+            {selectedTab === 5 ? <Profile /> : null}
           </div>
         </div>
       </div>
