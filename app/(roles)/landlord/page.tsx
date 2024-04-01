@@ -35,7 +35,7 @@ export default function UserInfo() {
       </Navbar>
       <div className="w-full relative top-24 lg:top-28 flexCenter h-max">
         <div className="flex flex-col lg:flex-row gap-6">
-          <div className="w-[90vw] h-[50vw] lg:w-[44vw] lg:min-h-32">
+          <div className="w-[90vw] lg:w-[44vw] lg:max-h-max">
             <Map zoom={16.5} />
           </div>
           <div>
