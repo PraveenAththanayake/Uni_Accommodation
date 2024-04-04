@@ -15,7 +15,7 @@ export const submitLocation = async (
     return { error: "Invalid fields!" };
   }
 
-  const { name, location, price, description, latitude, longitude } =
+  const { name, location, price, description, latitude, longitude, userEmail } =
     validatedFields.data;
 
   console.log("Submitting location:", {
@@ -25,6 +25,7 @@ export const submitLocation = async (
     description,
     latitude,
     longitude,
+    userEmail,
   });
 
   const existingLocation = await Places.findOne({ name });
@@ -40,6 +41,7 @@ export const submitLocation = async (
     description,
     latitude,
     longitude,
+    userEmail,
   });
 
   await newLocation.save();

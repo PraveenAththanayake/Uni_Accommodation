@@ -22,4 +22,5 @@ export const LocationSchema = z.object({
   description: z.string().min(1, { message: "Description is required" }),
   latitude: z.number(),
   longitude: z.number(),
+  userEmail: z.string(),
 });

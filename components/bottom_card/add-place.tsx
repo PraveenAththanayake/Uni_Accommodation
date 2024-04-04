@@ -20,6 +20,7 @@ import { submitLocation } from "@/actions/locations";
 import { useJsApiLoader } from "@react-google-maps/api";
 import { Label } from "../ui/label";
 import { toast } from "sonner";
+import useSessionData from "@/hooks/useSessionData";
 
 const AddPlaceToMap = () => {
   const [locationInput, setLocationInput] = useState("");
@@ -31,13 +32,14 @@ const AddPlaceToMap = () => {
   const locationRef = useRef<HTMLInputElement | null>(null);
   const [isPending, startTransition] = useTransition();
 
+  const { session, isLoading, isError } = useSessionData();
+
   const form = useForm<z.infer<typeof LocationSchema>>({
     resolver: zodResolver(LocationSchema),
     defaultValues: {
       name: "",
       location: "",
       price: "",
-      // picture: "",
       description: "",
     },
   });
@@ -100,10 +102,10 @@ const AddPlaceToMap = () => {
   const handleSubmit = async (e: {
     preventDefault: () => void;
     target: {
-      name: { value: any };
-      location: { value: any };
-      price: { value: any };
-      description: { value: any };
+      name: { value: string };
+      location: { value: string };
+      price: { value: string };
+      description: { value: string };
     };
   }) => {
     e.preventDefault();
@@ -122,15 +124,15 @@ const AddPlaceToMap = () => {
           description,
           latitude: lat,
           longitude: lng,
+          userEmail: session?.user?.email ?? "",
         });
 
         if (submissionResult.success) {
           toast.success(submissionResult.success);
+          form.reset();
         } else {
           toast.error(submissionResult.error);
         }
-
-        form.reset();
       }
     });
   };
