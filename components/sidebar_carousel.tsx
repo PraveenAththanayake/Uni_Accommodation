@@ -17,10 +17,11 @@ import {
   AlertDialogTitle,
   AlertDialogTrigger,
 } from "@/components/ui/alert-dialog";
-import { Button } from "@/components/ui/button";
 import { useEffect, useState } from "react";
 import { RxCross2 } from "react-icons/rx";
 import { IoCheckmark } from "react-icons/io5";
+import { toast } from "sonner";
+import { submitHouses } from "@/app/api/houses/route";
 
 const SidebarCarousel = () => {
   const [places, setPlaces] = useState([]);
@@ -34,6 +35,20 @@ const SidebarCarousel = () => {
 
     getPlaces();
   }, []);
+
+  const handleAddPlace = async (place: any) => {
+    console.log(place);
+    const submissionResult = await submitHouses(place);
+
+    if (submissionResult.success) {
+      toast.success(submissionResult.success);
+      window.location.reload();
+    } else {
+      toast.error(submissionResult.error);
+    }
+  };
+
+  const handleDeletePlace = async (place: any) => {};
 
   return (
     <Carousel
@@ -81,7 +96,11 @@ const SidebarCarousel = () => {
                         </AlertDialogHeader>
                         <AlertDialogFooter>
                           <AlertDialogCancel>Cancel</AlertDialogCancel>
-                          <AlertDialogAction>Continue</AlertDialogAction>
+                          <AlertDialogAction
+                            onClick={() => handleDeletePlace(place)}
+                          >
+                            Continue
+                          </AlertDialogAction>
                         </AlertDialogFooter>
                       </AlertDialogContent>
                     </AlertDialog>
@@ -104,7 +123,11 @@ const SidebarCarousel = () => {
                         </AlertDialogHeader>
                         <AlertDialogFooter>
                           <AlertDialogCancel>Cancel</AlertDialogCancel>
-                          <AlertDialogAction>Continue</AlertDialogAction>
+                          <AlertDialogAction
+                            onClick={() => handleAddPlace(place)}
+                          >
+                            Continue
+                          </AlertDialogAction>
                         </AlertDialogFooter>
                       </AlertDialogContent>
                     </AlertDialog>

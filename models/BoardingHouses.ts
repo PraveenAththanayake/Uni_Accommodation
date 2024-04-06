@@ -1,3 +1,4 @@
+// server/models/BoardingHouses.ts
 import mongoose, { Schema } from "mongoose";
 
 const BoardingHouseSchema = new Schema(
@@ -24,10 +25,6 @@ const BoardingHouseSchema = new Schema(
     },
     longitude: {
       type: Number,
-      required: true,
-    },
-    userEmail: {
-      type: String,
       required: true,
     },
   },
