@@ -1,6 +1,6 @@
 import mongoose, { Schema } from "mongoose";
 
-const LocationSchema = new Schema(
+const BoardingHouseSchema = new Schema(
   {
     name: {
       type: String,
@@ -36,7 +36,8 @@ const LocationSchema = new Schema(
   }
 );
 
-const Location =
-  mongoose.models.Location || mongoose.model("Location", LocationSchema);
+const BoardingHouses =
+  mongoose.models.BoardingHouses ||
+  mongoose.model("BoardingHouses", BoardingHouseSchema);
 
-export default Location;
+export default BoardingHouses;
