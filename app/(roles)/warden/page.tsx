@@ -6,8 +6,8 @@ import SidebarCarousel from "@/components/sidebar_carousel";
 export default function UserInfo() {
   return (
     <div className="flexBetween p-5 h-screen w-full gap-5">
-      <SidebarCarousel />
       <Map zoom={16.5} />
+      <SidebarCarousel />
       {/* {(session?.user as { role: string }).role === "warden" && (
         <div className="shadow-lg p-8 bg-zince-300/10 flex flex-col gap-2 my-6">
           <div>

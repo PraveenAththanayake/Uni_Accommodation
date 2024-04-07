@@ -3,8 +3,6 @@
 import { connectDB } from "@/lib/db";
 import BoardingHouses from "@/models/BoardingHouses";
 import { NextResponse } from "next/server";
-import { NextApiRequest } from "next";
-import { NextApiResponse } from "next";
 import { IPlace } from "@/interfaces";
 import { deletePlace } from "../places/route";
 

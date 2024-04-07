@@ -5,4 +5,5 @@ export interface IPlace {
   description: string;
   latitude: number;
   longitude: number;
+  userEmail: string;
 }
