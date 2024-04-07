@@ -1,15 +1,9 @@
 import * as z from "zod";
 
 export const RegisterSchema = z.object({
-  email: z.string().email({
-    message: "Email is required",
-  }),
-  password: z.string().min(6, {
-    message: "Minimum 6 characters required",
-  }),
-  name: z.string().min(1, {
-    message: "Name is required",
-  }),
+  email: z.string().email({ message: "Email is required" }),
+  password: z.string().min(6, { message: "Minimum 6 characters required" }),
+  name: z.string().min(1, { message: "Name is required" }),
   role: z.enum(["student", "landlord", "warden"], {
     required_error: "You need to select a notification type.",
   }),
@@ -32,4 +26,9 @@ export const RequestSchema = z.object({
   message: z.string().min(1, { message: "Message is required" }),
   accommodation: z.string().min(1, { message: "Accommodation is required" }),
   owner: z.string().min(1, { message: "Owner is required" }),
+});
+
+export const ArticleSchema = z.object({
+  heading: z.string().min(1, { message: "Heading is required" }),
+  content: z.string().min(1, { message: "Content is required" }),
 });

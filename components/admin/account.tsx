@@ -64,7 +64,7 @@ export function CreateAccount() {
     console.log(values);
   };
   return (
-    <Card className="w-[45vw]">
+    <Card className="w-[80vw] md:w-[45vw]">
       <CardHeader>
         <CardTitle>Create Accounts</CardTitle>
         <CardDescription>

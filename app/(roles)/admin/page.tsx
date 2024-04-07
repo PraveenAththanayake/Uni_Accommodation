@@ -21,7 +21,7 @@ import {
   PopoverContent,
   PopoverTrigger,
 } from "@/components/ui/popover";
-import Article from "@/components/admin/article";
+import { Article } from "@/components/admin/article";
 import { CreateAccount } from "@/components/admin/account";
 
 export default function UserInfo() {
@@ -30,7 +30,7 @@ export default function UserInfo() {
   return (
     <>
       <Navbar />
-      <div className="flex justify-around items-center w-full h-screen mt-12">
+      <div className="flex justify-center items-center md:items-start mt-24 xl:mt-28 w-full gap-4 md:flex-row flex-col">
         <CreateAccount />
         <Article />
       </div>
