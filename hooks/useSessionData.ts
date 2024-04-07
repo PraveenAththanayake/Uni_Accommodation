@@ -18,7 +18,7 @@ const useSessionData = () => {
       const redirectPath = redirectMap[(session.user as { role: string }).role];
 
       if (redirectPath) {
-        router.replace(redirectPath); // Use router.replace for smooth transitions
+        router.replace(redirectPath);
       }
     }
   }, [session, router]);

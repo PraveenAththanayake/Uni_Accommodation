@@ -6,15 +6,26 @@ import Map from "@/components/map";
 import Navbar from "@/components/navbar";
 import AddPlaceToMap from "@/components/bottom_card/add-place";
 import { LandlordSideLists } from "@/constants/LandlordSidebar";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Accommodations from "@/components/student/places";
 
 export default function UserInfo() {
   const { session, isLoading, isError } = useSessionData();
+  const [houses, setHouses] = useState([]);
   const [selectedTab, setSelectedTab] = useState<number | null>(0);
   const handleTabClick = (index: number): void => {
     setSelectedTab(index === selectedTab ? null : index);
   };
+
+  useEffect(() => {
+    async function getHouses() {
+      const response = await fetch("/api/houses");
+      const data = await response.json();
+      setHouses(data);
+    }
+
+    getHouses();
+  }, []);
 
   return (
     <div className="w-full h-screen">
@@ -37,7 +48,7 @@ export default function UserInfo() {
       <div className="w-full relative top-24 lg:top-28 flexCenter md:h-max">
         <div className="flex justify-between flex-col lg:flex-row gap-6">
           <div className="w-[90vw] lg:w-[44vw] h-[50vw] md:min-h-[38vw] md:max-h-max">
-            <Map zoom={16.5} />
+            <Map zoom={16.5} houses={houses} />
           </div>
           <div>
             {selectedTab === 0 ? <Accommodations /> : null}
