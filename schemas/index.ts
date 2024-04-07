@@ -10,7 +10,7 @@ export const RegisterSchema = z.object({
   name: z.string().min(1, {
     message: "Name is required",
   }),
-  role: z.enum(["student", "landlord"], {
+  role: z.enum(["student", "landlord", "warden"], {
     required_error: "You need to select a notification type.",
   }),
 });

@@ -12,16 +12,12 @@ const font = Poppins({
 
 export default function Home() {
   return (
-    /*
     <main className={cn("h-full flexCenter flex-col", font.className)}>
       <LoginButton>
         <Button variant="secondary" size="lg">
           Get Started
         </Button>
       </LoginButton>
-    </main>*/
-
-    <UserInfo/>
-    
+    </main>
   );
 }
