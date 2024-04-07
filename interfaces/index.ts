@@ -16,3 +16,17 @@ export interface IRequest {
   phoneNumber: string;
   message: string;
 }
+
+export interface MapProps {
+  center?: google.maps.LatLngLiteral;
+  zoom?: number;
+  onClick?: (event: google.maps.MapMouseEvent) => void;
+  selectedLocation?: google.maps.LatLngLiteral;
+  places?: {
+    description: string;
+    name: string;
+    latitude: number;
+    longitude: number;
+  }[];
+  houses?: { latitude: number; longitude: number }[];
+}
