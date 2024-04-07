@@ -3,10 +3,12 @@
 import Image from "next/image";
 import React from "react";
 import { ReactTyped } from "react-typed";
+import { LoginButton } from "./auth/login-button";
+import { Button } from "./ui/button";
 
 function HomePage() {
   return (
-    <body>
+    <div className="w-full h-screen">
       <img
         className="w-full h-screen object-cover brightness-75 "
         alt=""
@@ -20,7 +22,7 @@ function HomePage() {
           <h1 className="md:text-5xl sm:text-4xl text-3xl font-bold md:py-6">
             ACCOMADATIONS
           </h1>
-          <div>
+          <div className="mb-8">
             <p className="md:text-5xl sm:text-4xl text-xl  md:py-4">
               An ideal hostel for students
             </p>
@@ -32,12 +34,14 @@ function HomePage() {
               loop
             />
           </div>
-          <button className="bg-[rgb(156,223,147)] rounded-md w-[180px] font-medium my-6 mx-suto py-3">
-            Get Started
-          </button>
+          <LoginButton>
+            <Button variant="secondary" size="lg">
+              Get Started
+            </Button>
+          </LoginButton>
         </div>
       </div>
-    </body>
+    </div>
   );
 }
 
