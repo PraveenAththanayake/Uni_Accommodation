@@ -1,3 +1,4 @@
+// server/models/BoardingHouses.ts
 import mongoose, { Schema } from "mongoose";
 
 const BoardingHouseSchema = new Schema(
