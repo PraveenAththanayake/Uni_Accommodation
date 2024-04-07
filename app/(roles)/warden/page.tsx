@@ -1,11 +1,13 @@
 "use client";
 
 import Map from "@/components/map";
+import Navbar from "@/components/navbar";
 import SidebarCarousel from "@/components/sidebar_carousel";
 
 export default function UserInfo() {
   return (
     <div className="flexBetween p-5 h-screen w-full gap-5">
+      <Navbar />
       <Map zoom={16.5} />
       <SidebarCarousel />
       {/* {(session?.user as { role: string }).role === "warden" && (

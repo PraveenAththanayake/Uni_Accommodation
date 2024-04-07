@@ -24,3 +24,12 @@ export const LocationSchema = z.object({
   longitude: z.number(),
   userEmail: z.string(),
 });
+
+export const RequestSchema = z.object({
+  name: z.string().min(1, { message: "Name is required" }),
+  userEmail: z.string().email({ message: "Email is required" }),
+  phoneNumber: z.string().min(1, { message: "Phone number is required" }),
+  message: z.string().min(1, { message: "Message is required" }),
+  accommodation: z.string().min(1, { message: "Accommodation is required" }),
+  owner: z.string().min(1, { message: "Owner is required" }),
+});

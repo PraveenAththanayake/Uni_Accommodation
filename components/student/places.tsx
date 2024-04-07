@@ -12,13 +12,19 @@ import {
   AlertDialogTrigger,
 } from "@/components/ui/alert-dialog";
 import { Card, CardContent } from "@/components/ui/card";
-import { useEffect, useState } from "react";
-import { RxCross2 } from "react-icons/rx";
-import { IoCheckmark } from "react-icons/io5";
+import { useEffect, useState, useTransition } from "react";
 import { Button } from "../ui/button";
+import { Input } from "../ui/input";
+import useSessionData from "@/hooks/useSessionData";
+import { PostRequest } from "@/app/api/requests/route";
+import { toast } from "sonner";
 
 const Accommodations = () => {
   const [places, setPlaces] = useState([]);
+
+  const [isPending, startTransition] = useTransition();
+
+  const { session, isLoading, isError } = useSessionData();
 
   useEffect(() => {
     async function getPlaces() {
@@ -29,6 +35,36 @@ const Accommodations = () => {
 
     getPlaces();
   }, []);
+
+  const submitRequest = async (
+    place: any,
+    e: {
+      preventDefault: () => void;
+      target: {
+        phoneNumber: { value: string };
+        message: { value: string };
+      };
+    }
+  ) => {
+    e.preventDefault();
+    startTransition(async () => {
+      const response = await PostRequest({
+        accommodation: place.name,
+        owner: place.userEmail,
+        name: session?.user?.name || "",
+        email: session?.user?.email || "",
+        phoneNumber: e.target.phoneNumber.value,
+        message: e.target.message.value,
+      });
+      console.log(response);
+      if (response.success) {
+        toast.success(response.success);
+      } else {
+        toast.error(response.error);
+      }
+    });
+  };
+
   return (
     <BottomCardWrapper headerLabel="Accommodations">
       <ScrollArea className="h-[70vw] lg:h-[38vw]">
@@ -38,42 +74,62 @@ const Accommodations = () => {
               <div className="p-1">
                 <Card>
                   <CardContent className="flex flex-col justify-between p-6 relative">
-                    <div>
-                      <h2 className="text-lg font-semibold">{place.name}</h2>
-                      <p className="text-sm text-gray-500">
-                        Address : {place.location}
-                      </p>
-                      <p className="text-sm text-gray-500">
-                        Price : {place.price}
-                      </p>
-                      <p className="text-sm text-gray-500">
-                        Description : {place.description}
-                      </p>
+                    <h2 className="text-lg font-semibold">{place.name}</h2>
+                    <div className="text-sm text-gray-500">
+                      Address: {place.location}
                     </div>
+                    <div className="text-sm text-gray-500">
+                      Price: {place.price}
+                    </div>
+                    <div className="text-sm text-gray-500">
+                      Description: {place.description}
+                    </div>
+                    <div className="text-sm text-gray-500">
+                      Email: {place.userEmail}
+                    </div>
+
                     <div className="flex flex-row pt-3 gap-3 justify-end right-0 bottom-1">
                       <AlertDialog>
                         <AlertDialogTrigger asChild>
                           <Button className="m-2">Add a request</Button>
                         </AlertDialogTrigger>
                         <AlertDialogContent>
-                          <AlertDialogHeader>
-                            <AlertDialogTitle>
-                              Are you absolutely sure?
-                            </AlertDialogTitle>
-                            <AlertDialogDescription>
-                              This action cannot be undone. This will
-                              permanently add boarding house details to the map
-                              and save boarding hous data in our servers.
-                            </AlertDialogDescription>
-                          </AlertDialogHeader>
-                          <AlertDialogFooter>
-                            <AlertDialogCancel>Cancel</AlertDialogCancel>
-                            <AlertDialogAction
-                              onClick={() => handleAddPlace(place)}
-                            >
-                              Continue
-                            </AlertDialogAction>
-                          </AlertDialogFooter>
+                          <form onSubmit={(e) => submitRequest(place, e)}>
+                            <AlertDialogHeader>
+                              <AlertDialogTitle>
+                                Are you absolutely sure?
+                              </AlertDialogTitle>
+                              <AlertDialogDescription>
+                                This action cannot be undone. This will
+                                permanently add boarding house details to the
+                                map and save boarding house data in our servers.
+                              </AlertDialogDescription>
+                              <div className="flexCenter flex-col space-y-1.5 gap-2 my-3 text-black">
+                                <Input
+                                  type="text"
+                                  placeholder="Phone Number"
+                                  name="phoneNumber"
+                                  disabled={isPending}
+                                />
+                                <Input
+                                  type="text"
+                                  placeholder="Message"
+                                  name="message"
+                                  disabled={isPending}
+                                />
+                              </div>
+                            </AlertDialogHeader>
+                            <AlertDialogFooter className="mt-3">
+                              <AlertDialogCancel>Cancel</AlertDialogCancel>
+                              <AlertDialogAction
+                                type="submit"
+                                disabled={isPending}
+                                className=""
+                              >
+                                Confirm
+                              </AlertDialogAction>
+                            </AlertDialogFooter>
+                          </form>
                         </AlertDialogContent>
                       </AlertDialog>
                     </div>

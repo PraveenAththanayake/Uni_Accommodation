@@ -7,3 +7,12 @@ export interface IPlace {
   longitude: number;
   userEmail: string;
 }
+
+export interface IRequest {
+  accommodation: string;
+  owner: string;
+  name: string;
+  email: string;
+  phoneNumber: string;
+  message: string;
+}
